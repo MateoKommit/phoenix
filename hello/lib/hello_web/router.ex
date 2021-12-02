@@ -8,6 +8,7 @@ defmodule HelloWeb.Router do
     plug :put_root_layout, {HelloWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug HelloWeb.Plugs.Locale, "en"
   end
 
   pipeline :api do
@@ -20,7 +21,10 @@ defmodule HelloWeb.Router do
     get "/", PageController, :index
     get "/hello", HelloController, :index
     get "/hello/:messenger", HelloController, :show
-
+    resources "/users", UserController
+    resources "/posts", PostController, only: [:index, :show]
+    resources "/comments", CommentController, except: [:delete]
+    resources "/reviews", ReviewController
   end
 
   # Other scopes may use custom stacks.
