@@ -43,15 +43,16 @@ defmodule HelloWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    resources "/products", ProductController
-
     get "/redirect_test", PageController, :redirect_test, []
-
-    resources "/cart_items", CartItemController, only: [:create, :delete]
-
     get "/cart", CartController, :show
+
     put "/cart", CartController, :update
 
+    resources "/articles", ArticleController, except: [:new, :edit]
+    resources "/posts", PostController
+    resources "/products", ProductController
+    resources "/cart_items", CartItemController, only: [:create, :delete]
+    resources "/comments", CommentController
     resources "/orders", OrderController, only: [:create, :show]
   end
 

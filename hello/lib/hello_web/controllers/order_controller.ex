@@ -34,13 +34,13 @@ defmodule HelloWeb.OrderController do
   end
 
   def edit(conn, %{"id" => id}) do
-    order = Orders.get_order!(id)
+    order = Orders.get_order!(conn.assigns.current_uuid, id)
     changeset = Orders.change_order(order)
     render(conn, "edit.html", order: order, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "order" => order_params}) do
-    order = Orders.get_order!(id)
+    order = Orders.get_order!(conn.assigns.current_uuid, id)
 
     case Orders.update_order(order, order_params) do
       {:ok, order} ->
@@ -54,11 +54,12 @@ defmodule HelloWeb.OrderController do
   end
 
   def delete(conn, %{"id" => id}) do
-    order = Orders.get_order!(id)
+    order = Orders.get_order!(conn.assigns.current_uuid, id)
     {:ok, _order} = Orders.delete_order(order)
 
     conn
     |> put_flash(:info, "Order deleted successfully.")
     |> redirect(to: Routes.order_path(conn, :index))
   end
+
 end
