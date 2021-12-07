@@ -52,9 +52,9 @@ config :phoenix, :json_library, Jason
 import_config "#{config_env()}.exs"
 
 config :hello, Hello.Repo,
-  username: "kommit",
-  password: "kommit",
-  database: "phoenix",
-  hostname: "localhost",
-  show_sensitive_data_on_connection_error: true,
+  username: "wfyjavdybufdoq",
+  password: "fa56538ca5e90bd659e00c422cfc4b083121464b5ed4cbef4dc4ec06d36e4f31",
+  database: "ddom5ricsj44ov",
+  hostname: "ec2-34-233-214-228.compute-1.amazonaws.com",
+  show_sensitive_data_on_connection_error: false,
   pool_size: 10
